@@ -1,4 +1,4 @@
-def call (Map Configmap){
+def call (Map configmap){
     pipeline {   // Configmap is the variable that receives the Map
         agent {
             node {
@@ -9,8 +9,8 @@ def call (Map Configmap){
             COURSE = 'jenkins'
             APP_VERSION = ""
             ACC_ID = '183992491863'
-            PROJECT = configMap.get(project)
-            COMPONENT = configMap.get(component)
+            PROJECT = configmap.get("project")
+            COMPONENT = configmap.get("component")
         }
         options {
             timeout(time: 10, unit: 'MINUTES')
