@@ -17,6 +17,10 @@ def call (Map configmap){
             disableConcurrentBuilds()
             ansiColor('xterm')
         }
+        parameters {
+            string(name: 'appVersion', value: "${appVersion}"),
+            string(name: 'deploy_to', value: "dev")
+        }
         stages {
             stage('Read Version') {
                 steps {
@@ -147,14 +151,11 @@ def call (Map configmap){
                         build job: "../${COMPONENT}-deploy",
                             wait: false, // Wait for completion
                             propagate: false, // Propagate status
-                            sh """
-                                aws eks update-kubeconfig --region ${REGION} --name roboshop-dev
-                                kubectl get nodes
-                            """
                             parameters: [
                                 string(name: 'appVersion', value: "${appVersion}"),
                                 string(name: 'deploy_to', value: "dev")
                             ]
+                            
                     }
                 }
             }
