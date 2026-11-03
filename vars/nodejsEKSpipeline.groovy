@@ -147,8 +147,10 @@ def call (Map configmap){
                         build job: "../${COMPONENT}-deploy",
                             wait: false, // Wait for completion
                             propagate: false, // Propagate status
-                            aws eks update-kubeconfig --region ${REGION} --name ${PROJECT}-${params.deploy_to}
-                            kubectl get nodes
+                            sh """
+                                aws eks update-kubeconfig --region ${REGION} --name roboshop-dev
+                                kubectl get nodes
+                            """
                             parameters: [
                                 string(name: 'appVersion', value: "${appVersion}"),
                                 string(name: 'deploy_to', value: "dev")
