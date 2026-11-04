@@ -18,7 +18,7 @@ def call (Map configmap){
             ansiColor('xterm')
         }
         parameters {
-            string(name: 'appVersion', value: "${appVersion}"),
+            string(name: 'APP_VERSION', value: "${APP_VERSION}"),
             string(name: 'deploy_to', value: "dev")
         }
         stages {
@@ -152,7 +152,7 @@ def call (Map configmap){
                             wait: false, // Wait for completion
                             propagate: false, // Propagate status
                             parameters: [
-                                string(name: 'appVersion', value: "${appVersion}"),
+                                string(name: 'APP_VERSION', value: "${APP_VERSION}"),
                                 string(name: 'deploy_to', value: "dev")
                             ]
                             
